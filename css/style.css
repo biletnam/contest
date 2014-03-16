@@ -1,0 +1,302 @@
+/* CSS Document */
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                  CSS RESET THANKS TO ERIC MEYER                               */
+/*                   http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/                */
+/*-----------------------------------------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+#logo {
+	position: absolute;
+	left: 11px;
+	top: 10px;
+	margin: 0;
+}
+
+/* remember to define focus styles! */
+:focus {outline: 0;}
+body {line-height: 1;color: black;background: white;}
+ol, ul {
+	list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {border-collapse: separate;border-spacing: 0;}
+caption, th, td {text-align: left;font-weight: normal;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: '"';}
+blockquote, q {quotes: '"' '"';}
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                          GENERAL STYLES                                       */
+/*-----------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 1.6em;
+	color: #555;
+	background-color: #F4F4F4;
+}
+	
+p {margin: 15px 0; font-family: Arial, Helvetica, sans-serif;}
+
+h1 {font-size: 1.4em;}
+h2 {font-weight: bold;}
+
+a {
+	font-weight: bold;
+	text-decoration:underline;
+	color: #666666;
+	border-bottom-color: #FFCC33;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+}
+a:hover {
+	color: #FFCC00;
+	border-bottom-style: solid;
+	text-decoration: none;
+}
+
+a.menu {
+	font-weight: bold;
+	text-decoration:none;
+	color: #555555;
+	border-left: 7px gold solid;
+	padding-left: 3px;
+}
+a.menu:hover {
+	color: #FFCC00;
+}
+
+strong {font-weight: bold;}
+
+textarea {white-space: nowrap;}
+
+/*--------------------------------------------------------------------------------
+	other
+----------------------------------------------------------------------------------*/
+
+.menu_bar{
+	list-style-type: none;
+	padding: 2px;
+	background-color: #CCCCCC;
+}
+.menu_bar li {
+	display: inline;
+	padding: 3px 10px 3px 10px;
+	background-color: #F4F4F4;
+}
+.menu_bar li:hover {
+	background-color: #FFFFFF;
+}
+#login {
+	padding: 3px;
+
+}
+#login form {
+	margin: 0px;
+	padding: 0px;
+}
+.header{
+	color: #6A490D;
+	border-bottom: 1px white solid;
+	border-top: 1px white solid;
+	background-color: #F5F5F5;
+}
+.page_name{
+	font-size:16px;
+	font-style:italic;
+	font-weight:bold;
+	background-color:#E8E8E8;
+}
+li.active_page{
+	background-color:#F9C70F;
+	color: #333333;
+}
+li.active_page:hover{
+	background-color:#FEE434;
+}
+li.active_page>a{
+	color: #333333;
+}
+a.dimness{
+	border-color: #FF0000;
+	color: #CCCCCC;
+}
+a.dimness:hover{
+	border-color: #FF0000;
+	color: #FF6A6A;
+}
+.response{
+	background-color: #E0E0E0;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 3px white double;
+}
+div.page {
+	margin-left: 150px;
+	min-height: 400px;
+	margin-right: 150px;
+	background-color: #EEEEEE;
+	padding: 0px 20px 20px 20px;
+}
+.page_menu{
+	text-align: center;
+	display: block;
+	background-color: #F4F4F4;
+}
+.page_menu>li{
+	margin-right:10px;
+	display:inline;
+}
+.access_denied{
+	height:300px;
+	text-align:center;
+	padding-top:100px;
+	font-size: 30px;
+	line-height: 30px;
+}
+.new{
+	background-color:#5BF46A
+}
+.new:hover{
+	background-color:#BBF99D
+}
+a.new{
+	border-color: #00FF33;
+	background:none;
+}
+a.new:hover{
+	color: #00CC33;
+	border-color: #00FF33;
+	background:none;
+}
+.page_name {
+	color: #000099;
+}
+.list {
+}
+.list li {
+	padding-left: 15px;
+}
+.input_form {
+	padding-top:10px;
+}
+.input_form label{
+	background-color:#E8E8E8;
+	font-style:italic;
+}
+.input_form textarea,.input_form input,.text,.input {
+	margin-bottom:10px;
+	border: 1px silver solid;
+	background-color: #FBFBF4;
+	display: block;
+	width: 100%;
+	padding: 0px;
+	font-weight: normal;
+
+	font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 1.6em;
+	color: #555;
+}
+.input_form textarea:hover,.input_form input:hover, .input:hover {
+	border: 1px #FFE9A6 solid;
+	background-color: #FFFECE;
+	color: #FFCC00;
+}
+.input_form textarea:active,.input_form input:active, .input:active {
+	background-color: #FFFECE;
+}
+.input_form textarea:focus,.input_form input:focus, .input:focus {
+	border: 1px gold solid;
+	background-color: #FFFFFF;
+	color: #555;
+}
+.text {
+	display: block;
+	padding: 5px;
+	width: auto;
+	margin-top: 0px;
+}
+.input {
+	display: block;
+	width: auto;
+	margin-top: 0px;
+	text-align: center;
+	text-decoration:none;
+	padding:0px;
+	line-height: 1.4em;
+}
+.team_leader {
+	color: #009900;
+}
+.state {
+	padding:5px;
+	border:1px #CCCCCC solid;
+}
+.tbl td {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.tbl thead{
+	color: #F7F7F7;
+	background-color: #999999;
+}
+.tbl tbody{
+	background-color: #F7F7F7;
+}
+.tbl tr.odd{
+	background-color: #EEEEEE;
+}
+.dark{
+	background-color: #DDDDDD;
+}
+
+/*---------------------------------------------------------------------------------------------
+		����� ���������
+---------------------------------------------------------------------------------------------*/
+
+.success,.true{
+	background-color: #DAF0D0;
+}
+.fail,.false,.error{
+	background-color: #F0D2D0;
+}
+.true{
+	border: 3px #AFA double;
+}
+.false{
+	background-color: #F0D2D0;
+	border: 3px #FAA double;
+}
+.remove{
+	font-weight:bold;
+	text-decoration:line-through;
+}
+.add{
+	background-color: #F2FDF2;
+	border-color: #E0EBDE;
+	color: #006633;
+}
+.add:hover{
+	background-color:#88FF88;
+	border-color:#B0EBB0;
+	color: #00CC00;
+}
