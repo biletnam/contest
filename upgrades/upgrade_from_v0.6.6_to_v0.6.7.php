@@ -42,7 +42,7 @@ global $CORE;
 		foreach($ret as &$c){
 			$c['name_translit']=rus2lat($c['name']);
 			$text='(';
-			foreach($c as &$v) $v="'".mysql_escape_string($v)."'";
+			foreach($c as &$v) $v="'".mysql_real_escape_string($v)."'";
 			$text.=implode(",",array_values($c));
 			$text.=')';
 			$c=$text;

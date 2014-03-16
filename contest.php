@@ -68,7 +68,7 @@
 		}		
 	}
 	if($LOGIN->in_contest){
-		$_REQUEST['of']='contest';
+		$_REQUEST['what']='contest';
 		include 'core/tick.php';	
 		process_errors();
 	};

@@ -7,7 +7,7 @@ try{
 				$OUT->errorcode[]=array_merge($INVALID['user_name'],array('параметр'=>'user_name(имя пользователя)'));
 			}
 			if(!count($OUT->errorcode)){// нет ошибок
-				$nt=mysql_escape_string(rus2lat($_REQUEST['user_name']));
+				$nt=mysql_real_escape_string(rus2lat($_REQUEST['user_name']));
 				$OUT->result[]=(object)array('valid'=>!mysql_query_single("
 					SELECT COUNT(*)
 					FROM `user`as u, `team` as t, `contest` as c
@@ -21,8 +21,8 @@ try{
 			$item=(object)array('valid'=>(bool)mysql_query_single("
 				SELECT `id`
 				FROM `user`
-				WHERE `name`='".mysql_escape_string($_REQUEST['user_name'])."'
-					AND `passw`=MD5('".mysql_escape_string($_REQUEST['user_passw'])."')
+				WHERE `name`='".mysql_real_escape_string($_REQUEST['user_name'])."'
+					AND `passw`=MD5('".mysql_real_escape_string($_REQUEST['user_passw'])."')
 				LIMIT 1
 			"));
 			$OUT->result[] = $item;
@@ -32,7 +32,7 @@ try{
 				$OUT->errorcode[]=array_merge($INVALID['team_name'],array('параметр'=>'team_name(название команды)'));	
 			}
 			if(!count($OUT->errorcode)){// нет ошибок
-				$nt=mysql_escape_string(rus2lat($_REQUEST['team_name']));
+				$nt=mysql_real_escape_string(rus2lat($_REQUEST['team_name']));
 				$OUT->result[]=(object)array('valid'=>!mysql_query_single("
 					SELECT COUNT(*)
 					FROM `user`as u, `team` as t, `contest` as c
@@ -47,7 +47,7 @@ try{
 				$OUT->errorcode[]=array_merge($INVALID['contest_name'],array('параметр'=>'contest_name(название конкурса)'));
 			}
 			if(!count($OUT->errorcode)){// нет ошибок	
-				$nt=mysql_escape_string(rus2lat($_REQUEST['contest_name']));
+				$nt=mysql_real_escape_string(rus2lat($_REQUEST['contest_name']));
 				$OUT->result[]=(object)array('valid'=>!mysql_query_single("
 					SELECT COUNT(*)
 					FROM `user`as u, `team` as t, `contest` as c

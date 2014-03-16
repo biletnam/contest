@@ -14,16 +14,16 @@ try{
 				$OUT->errorcode[]=array_merge($INVALID['user_time_zone'],array('параметр'=>'user_time_zone(временная зона пользователя)'));			
 			}
 			if(!count($OUT->errorcode)){// нет ошибок
-				$nt=mysql_escape_string(rus2lat($_REQUEST['user_name']));
+				$nt=mysql_real_escape_string(rus2lat($_REQUEST['user_name']));
 				mysql_query_log("
 					INSERT IGNORE INTO `user`(`name`,`passw`,`name_translit`,`time_zone`)
 					SELECT @name as 'name',@passw as 'passw',
 						'$nt' as 'name_translit',
-						'".mysql_escape_string($_REQUEST['user_time_zone'])."' as 'time_zone'
+						'".mysql_real_escape_string($_REQUEST['user_time_zone'])."' as 'time_zone'
 					FROM (
 						SELECT
 						@name:='{$_REQUEST['user_name']}',
-						@passw:=MD5('".mysql_escape_string($_REQUEST['user_passw'])."')
+						@passw:=MD5('".mysql_real_escape_string($_REQUEST['user_passw'])."')
 					) as `setup`,
 					(
 						SELECT COUNT(*) as 'c'
@@ -45,7 +45,7 @@ try{
 				$OUT->errorcode[]=array_merge($INVALID['team_name'],array('параметр'=>'team_name(название команды)'));	
 			}
 			if(!count($OUT->errorcode)){// нет ошибок
-				$nt=mysql_escape_string(rus2lat($_REQUEST['team_name']));
+				$nt=mysql_real_escape_string(rus2lat($_REQUEST['team_name']));
 				$team_desc=isset($_REQUEST['team_desc'])?htmlspecialchars($_REQUEST['team_desc']):'';
 				mysql_query_log("begin");
 				mysql_query_log("
@@ -56,8 +56,8 @@ try{
 						@desc as 'desc'
 					FROM (
 						SELECT @user:={$LOGIN->id},
-						@name:='".mysql_escape_string($_REQUEST['team_name'])."',
-						@desc:='".mysql_escape_string($team_desc)."'
+						@name:='".mysql_real_escape_string($_REQUEST['team_name'])."',
+						@desc:='".mysql_real_escape_string($team_desc)."'
 					) as `setup`,
 					(
 						SELECT COUNT(*) as 'c'
@@ -126,7 +126,7 @@ try{
 							AND `team`='$id' AND `role`=1 AND `state`='accept'
 						LIMIT 1
 					) as `check`
-					SET `desc`='".mysql_escape_string($team_desc)."'
+					SET `desc`='".mysql_real_escape_string($team_desc)."'
 					WHERE @valid=1 AND `id`='$id'
 				");		
 				$item=(object)array('valid'=>(bool)mysql_affected_rows());
@@ -296,7 +296,7 @@ try{
 			}else{$contest_auto_tick=(int)(bool)$_REQUEST['contest_auto_tick'];}
 
 			if(!count($OUT->errorcode)){// нет ошибок
-				$nt=mysql_escape_string(rus2lat($_REQUEST['contest_name']));
+				$nt=mysql_real_escape_string(rus2lat($_REQUEST['contest_name']));
 				$contest_rules=isset($_REQUEST['contest_rules'])?htmlspecialchars($_REQUEST['contest_rules']):'';
 				$contest_desc=isset($_REQUEST['contest_desc'])?htmlspecialchars($_REQUEST['contest_desc']):'';
 				mysql_query_log("begin");
@@ -313,15 +313,15 @@ try{
 				");
 				$item->valid_name && mysql_query_log("
 					INSERT IGNORE INTO `contest`
-					SET `name`='".mysql_escape_string($_REQUEST['contest_name'])."',
+					SET `name`='".mysql_real_escape_string($_REQUEST['contest_name'])."',
 						`name_translit`='$nt',
-						`rules`='".mysql_escape_string($contest_rules)."',
-						`desc`='".mysql_escape_string($contest_desc)."',
-						`content`='".mysql_escape_string($down_link)."',
-						`open_date`='".mysql_escape_string($contest_open_date)."',
-						`wait_date`='".mysql_escape_string($contest_wait_date)."',
-						`vote_date`='".mysql_escape_string($contest_vote_date)."',
-						`close_date`='".mysql_escape_string($contest_close_date)."',
+						`rules`='".mysql_real_escape_string($contest_rules)."',
+						`desc`='".mysql_real_escape_string($contest_desc)."',
+						`content`='".mysql_real_escape_string($down_link)."',
+						`open_date`='".mysql_real_escape_string($contest_open_date)."',
+						`wait_date`='".mysql_real_escape_string($contest_wait_date)."',
+						`vote_date`='".mysql_real_escape_string($contest_vote_date)."',
+						`close_date`='".mysql_real_escape_string($contest_close_date)."',
 						`auto_tick`='".$contest_auto_tick."'
 				");
 				unset($nt);
@@ -374,7 +374,7 @@ try{
 				$contest_rules=isset($_REQUEST['contest_rules'])?htmlspecialchars($_REQUEST['contest_rules']):'';
 				$contest_desc=isset($_REQUEST['contest_desc'])?htmlspecialchars($_REQUEST['contest_desc']):'';
 				$contest_content=isset($_REQUEST['contest_content'])?htmlspecialchars($_REQUEST['contest_content']):'';
-				$nt=mysql_escape_string(rus2lat($_REQUEST['contest_name']));
+				$nt=mysql_real_escape_string(rus2lat($_REQUEST['contest_name']));
 				$r=mysql_query_log("
 					UPDATE IGNORE `contest` as c, (
 						SELECT COUNT(*) as 'c'
@@ -382,16 +382,16 @@ try{
 						WHERE u.`name_translit`='$nt' OR t.`name_translit`='$nt' OR (c.`name_translit`='$nt' AND c.id != $id)
 					) as ex
 					SET
-						c.`name`= '".mysql_escape_string($contest_name)."',
+						c.`name`= '".mysql_real_escape_string($contest_name)."',
 						c.`name_translit`='$nt',
-						c.`rules`= '".mysql_escape_string($contest_rules)."',
-						c.`desc`='".mysql_escape_string($contest_desc)."',
-						c.`content`='".mysql_escape_string($contest_content)."',
-						c.`state`='".mysql_escape_string($_REQUEST['state'])."',
-						c.`open_date`='".mysql_escape_string($contest_open_date)."',
-						c.`wait_date`='".mysql_escape_string($contest_wait_date)."',
-						c.`vote_date`='".mysql_escape_string($contest_vote_date)."',
-						c.`close_date`='".mysql_escape_string($contest_close_date)."',
+						c.`rules`= '".mysql_real_escape_string($contest_rules)."',
+						c.`desc`='".mysql_real_escape_string($contest_desc)."',
+						c.`content`='".mysql_real_escape_string($contest_content)."',
+						c.`state`='".mysql_real_escape_string($_REQUEST['state'])."',
+						c.`open_date`='".mysql_real_escape_string($contest_open_date)."',
+						c.`wait_date`='".mysql_real_escape_string($contest_wait_date)."',
+						c.`vote_date`='".mysql_real_escape_string($contest_vote_date)."',
+						c.`close_date`='".mysql_real_escape_string($contest_close_date)."',
 						c.`auto_tick`='".$contest_auto_tick."'
 					WHERE c.`id`=$id AND ex.c=0
 				");
@@ -573,12 +573,12 @@ try{
 				$comments_str='';
 				if($r){
 					krsort($td_to);
-					$to_str=mysql_escape_string(implode(',',$td_to));
+					$to_str=mysql_real_escape_string(implode(',',$td_to));
 					krsort($td_comments);
 					foreach($td_comments as &$v){
-						$v=str_replace(',',mysql_escape_string('&#8218;'),htmlspecialchars($v));
+						$v=str_replace(',',mysql_real_escape_string('&#8218;'),htmlspecialchars($v));
 					}
-					$comments_str=mysql_escape_string( implode(',',$td_comments) );
+					$comments_str=mysql_real_escape_string( implode(',',$td_comments) );
 				}
 				$r = $r && $res=mysql_query_log("
 					SET 
@@ -597,7 +597,7 @@ try{
 				");
 				$r = $r && $res=mysql_query_log("
 					# удаляю старые голоса
-					DELETE vote as v
+					DELETE
 					FROM vote as v
 					WHERE @valid=0 AND @bad IS NULL AND @contest=v.contest AND @user=v.from
 				");
@@ -684,7 +684,7 @@ try{
 					SELECT @name as 'name', @filename as 'filename', @pid as 'pid'
 					FROM 
 						(
-							SELECT @pid:=$pid, @user:={$LOGIN->id}, @name:='".mysql_escape_string($work_name)."', @filename:='".mysql_escape_string($work_filename)."'
+							SELECT @pid:=$pid, @user:={$LOGIN->id}, @name:='".mysql_real_escape_string($work_name)."', @filename:='".mysql_real_escape_string($work_filename)."'
 						) as `setup`,
 						participation as p
 						LEFT JOIN work as w ON w.pid=p.id

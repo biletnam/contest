@@ -6,7 +6,7 @@ try{
 			if(false !== $ret=mysql_query_array("
 				SELECT *
 				FROM `user`
-				WHERE `id`='".mysql_escape_string($_REQUEST['id'])."'
+				WHERE `id`='".mysql_real_escape_string($_REQUEST['id'])."'
 				LIMIT 1
 			")){
 				$OUT->result=$ret;
@@ -16,7 +16,7 @@ try{
 			if(false !== $ret=mysql_query_array("
 				SELECT *
 				FROM `team`
-				WHERE `id`='".mysql_escape_string($_REQUEST['id'])."'
+				WHERE `id`='".mysql_real_escape_string($_REQUEST['id'])."'
 				LIMIT 1
 			")){
 				$OUT->result=$ret;
@@ -26,7 +26,7 @@ try{
 			if(false !== $ret=mysql_query_array("
 				SELECT *
 				FROM `contest`
-				WHERE `id`='".mysql_escape_string($_REQUEST['id'])."'
+				WHERE `id`='".mysql_real_escape_string($_REQUEST['id'])."'
 				LIMIT 1
 			")){
 				$OUT->result=$ret;
@@ -43,7 +43,7 @@ try{
 					SELECT m.id, t.id as 'team', t.name as 'team_name', t.desc as 'team_desc',
 						m.role, r.name as 'role_name', r.desc as 'role_desc'
 					FROM (
-						SELECT @user:=$id_user, @team:=$id_team
+						SELECT @user:={$_REQUEST['id_user']}, @team:={$_REQUEST['id_team']}
 					) as `setup`, team as t
 					LEFT JOIN (
 						SELECT m.*
@@ -101,7 +101,7 @@ try{
 						w.id as 'work'
 					FROM 
 						(
-							SELECT @contest:=$id_contest, @user:=$id_user
+							SELECT @contest:={$_REQUEST['id_contest']}, @user:={$_REQUEST['id_user']}
 						) as `setup`,
 						user as u1 # login
 						LEFT JOIN (

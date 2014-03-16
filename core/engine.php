@@ -37,15 +37,15 @@
 				list($LOGIN->id, $LOGIN->mktime, $LOGIN->name_translit, $LOGIN->time_zone)=mysql_query_row("
 					SELECT `id`,`mktime`,`name_translit`,`time_zone`
 					FROM `user`
-					WHERE `name`='".mysql_escape_string($LOGIN->name)."'
+					WHERE `name`='".mysql_real_escape_string($LOGIN->name)."'
 					LIMIT 1
 				");
 			}else{
 				list($LOGIN->id, $LOGIN->mktime, $LOGIN->name_translit, $LOGIN->time_zone)=mysql_query_row("
 					SELECT `id`,`mktime`,`name_translit`,`time_zone`
 					FROM `user`
-					WHERE `name`='".mysql_escape_string($LOGIN->name)."'
-						AND `passw`=MD5('".mysql_escape_string($LOGIN->passw)."')
+					WHERE `name`='".mysql_real_escape_string($LOGIN->name)."'
+						AND `passw`=MD5('".mysql_real_escape_string($LOGIN->passw)."')
 					LIMIT 1
 				");	
 			}
@@ -69,15 +69,15 @@
 				list($LOGIN->id, $LOGIN->mktime, $LOGIN->name_translit, $LOGIN->time_zone)=mysql_query_row("
 					SELECT `id`, `mktime`,`name_translit`,`time_zone`
 					FROM `user`
-					WHERE `name`='".mysql_escape_string($LOGIN->name)."'
+					WHERE `name`='".mysql_real_escape_string($LOGIN->name)."'
 					LIMIT 1
 				");
 			}else{
 				list($LOGIN->id, $LOGIN->mktime, $LOGIN->name_translit, $LOGIN->time_zone)=mysql_query_row("
 					SELECT `id`, `mktime`,`name_translit`,`time_zone`
 					FROM `user`
-					WHERE `name`='".mysql_escape_string($LOGIN->name)."'
-						AND `passw`=MD5('".mysql_escape_string($LOGIN->passw)."')
+					WHERE `name`='".mysql_real_escape_string($LOGIN->name)."'
+						AND `passw`=MD5('".mysql_real_escape_string($LOGIN->passw)."')
 					LIMIT 1
 				");
 			}
