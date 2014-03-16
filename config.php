@@ -13,29 +13,19 @@
 	define('SITE_TZ','Europe/Moscow'); // часовой пояс сайта
 	date_default_timezone_set(SITE_TZ); // часовой пояс для сайта
 
-$dbset=array(
-	'ваш локальный хост'=>array( // локальные настройки
-		'dblocation'=>'localhost',
-		'dbname'=>'db_contest',
-		'dbuser'=>'пользователь',
-		'dbpasswd'=>'пароль'				
-	),
-	'ваш веб хост'=>array( // настройки на хостинге
-		'dblocation'=>'',
-		'dbname'=>'',
-		'dbuser'=>'',
-		'dbpasswd'=>''									 
-	)
-);
 
-//var_export(php_uname('n')); // !Запусти это, чтоб посмотреть что у тебя!
-list($dblocation,$dbname,$dbuser,$dbpasswd)=array_values($dbset[php_uname('n')]);
+//var_export(md5(php_uname('n'))); // !Запусти это, чтоб посмотреть что у тебя!
+
+// специальный конфиг файл
+require_once( 'config/'.md5(php_uname('n')).'.php' );
+
+list($dblocation,$dbname,$dbuser,$dbpasswd,$allow_debug)=array_values($dbconf);
 
 	$CORE = new stdClass;
-	$CORE->version='0.6.11';
+	$CORE->version='0.6.13';
 	global $page;
 	$CORE->title = isset($page)?$page:'Страница без заголовка';
-	$CORE->allow_debug=true; // разрешить режим отладки ( включает упрощённую авторизацию )
+	$CORE->allow_debug=$allow_debug; // разрешить режим отладки ( включает упрощённую авторизацию )
 
 	$link = @mysql_connect($dblocation,$dbuser,$dbpasswd);
 	unset($dblocation,$dbuser,$dbpasswd);
@@ -43,13 +33,15 @@ list($dblocation,$dbname,$dbuser,$dbpasswd)=array_values($dbset[php_uname('n')])
 	mb_internal_encoding(CORE_CHARSET);
 	if (!$link) 
 	{
+		header('Content-Type: text/html; charset=utf-8');
 		echo( "<P> В настоящий момент сервер базы данных не доступен, поэтому корректное отображение страницы невозможно. </P>" );
 		exit();
 	}
 	if (!@mysql_select_db($dbname, $link)) 
 	{
+		header('Content-Type: text/html; charset=utf-8');
 		echo( "<P> В настоящий момент база данных не доступна, поэтому корректное отображение страницы невозможно.</P>" );
 		exit();
 	}
-	unset($dblocation,$dbname,$dbuser,$dbpasswd,$dbset);
+	unset($dblocation,$dbname,$dbuser,$dbpasswd,$allow_debug,$dbconf);
 ?>
