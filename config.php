@@ -22,7 +22,7 @@ require_once( 'config/'.md5(php_uname('n')).'.php' );
 list($dblocation,$dbname,$dbuser,$dbpasswd,$allow_debug)=array_values($dbconf);
 
 	$CORE = new stdClass;
-	$CORE->version='0.6.13';
+	$CORE->version='0.6.14';
 	global $page;
 	$CORE->title = isset($page)?$page:'Страница без заголовка';
 	$CORE->allow_debug=$allow_debug; // разрешить режим отладки ( включает упрощённую авторизацию )
