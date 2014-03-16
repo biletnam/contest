@@ -14,13 +14,13 @@
 	date_default_timezone_set(SITE_TZ); // часовой пояс для сайта
 
 $dbset=array(
-	'ваш локальный хост'=>array( // 
+	'ваш локальный хост'=>array( // локальные настройки
 		'dblocation'=>'localhost',
 		'dbname'=>'db_contest',
 		'dbuser'=>'пользователь',
 		'dbpasswd'=>'пароль'				
 	),
-	'ваш веб хост'=>array( // 
+	'ваш веб хост'=>array( // настройки на хостинге
 		'dblocation'=>'',
 		'dbname'=>'',
 		'dbuser'=>'',
